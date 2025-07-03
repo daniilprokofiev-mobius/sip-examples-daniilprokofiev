@@ -271,9 +271,9 @@
     </build>
     
      <scm>
-		<connection>scm:git:https://github.com/mobius-software-ltd/corsac-sip.git</connection>
-		<developerConnection>scm:git:git@github.com:mobius-software-ltd/corsac-sip.git</developerConnection>
-		<url>https://github.com/mobius-software-ltd/corsac-sip</url>
+		<connection>scm:git:https://github.com/mobius-software-ltd/sip-examples.git</connection>
+		<developerConnection>scm:git:git@github.com:mobius-software-ltd/sip-examples.git</developerConnection>
+		<url>https://github.com/mobius-software-ltd/sip-examples.git</url>
 	    <tag>HEAD</tag>
     </scm>
     
