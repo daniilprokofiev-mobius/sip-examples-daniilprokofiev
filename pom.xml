@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+		<groupId>com.mobius-software</groupId>
+		<artifactId>mobius-public-parent</artifactId>
+		<version>1.0.12</version>
+	</parent>
+	
+    <groupId>com.mobius-software.protocols.sip</groupId>
+    <artifactId>sip-examples</artifactId>
+    <version>10.0.1-12-SNAPSHOT</version>
+
+    <packaging>jar</packaging>
+    
+	<name>sip-examples</name>
+    <description>SIP EXAMPLES Parent pom</description>
+    <url>https://github.com/mobius-software-ltd/sip-examples.git</url>
+    
+    <developers>
+        <developer>
+            <id>jean.deruelle</id>
+            <name>Jean Deruelle</name>
+            <email>jean.deruelle@gmail.com</email>
+            <organization>TeleStax</organization>
+            <organizationUrl>http://www.telestax.com/</organizationUrl>
+            <roles>
+                <role>Active Developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>vralev</id>
+            <name>Vladimir Ralev</name>
+            <email>vladimir.ralev@gmail.com</email>
+            <organization>TeleStax</organization>
+            <organizationUrl>http://www.telestax.com/</organizationUrl>
+            <roles>
+                <role>Active Developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>ranga</id>
+            <name>ranga</name>
+            <email>mranga@gmail.com</email>
+            <organization>NIST</organization>
+            <organizationUrl>http://www.nist.gov/</organizationUrl>
+            <roles>
+                <role>Project Lead</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>yulianoifa</id>
+            <name>yulianoifa</name>
+            <email>yulian.oifa@mobius-software.com</email>
+            <organization>Mobius Software LTD</organization>
+            <organizationUrl>https://www.mobius-software.com/</organizationUrl>
+            <roles>
+                <role>Project Lead</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>		
+    </developers>
+    <licenses>
+        <license>
+            <name>AGPL</name>
+            <url>https://www.gnu.org/licenses/agpl-3.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    
+     <properties>
+		<junit.version>4.12</junit.version>       
+        <compiler.plugin.version>3.8.1</compiler.plugin.version>
+        <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+        <!-- IDEs has a problem when we use late binding with @ in the surefire arg line.
+        Therefore we set this empty property here-->
+        <jacocoArgLine />       
+    </properties>
+    
+     <dependencies>
+        <dependency>
+            <groupId>com.mobius-software.protocols.sip</groupId>
+            <artifactId>sip-ri</artifactId>
+            <version>10.0.1-12</version>
+        </dependency>  
+        <dependency>
+            <groupId>com.mobius-software.protocols.sip</groupId>
+            <artifactId>sip-testsuite-common</artifactId>
+            <version>10.0.1-12</version>
+        </dependency>                        
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>                 
+    </dependencies>
+    
+    <profiles>
+    	<profile>
+    		<id>java8</id>
+    		<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+    		<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>${compiler.plugin.version}</version>
+						<configuration>
+							<source>1.8</source>
+							<target>1.8</target>
+							<debug>1.8</debug>							
+							<encoding>ISO-8859-1</encoding>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>			
+    	</profile>
+    	<profile>
+    		<id>java11</id>
+    		<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>${compiler.plugin.version}</version>
+						<configuration>
+							<source>11</source>
+							<target>11</target>
+							<debug>11</debug>
+							<encoding>ISO-8859-1</encoding>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>			
+    	</profile>
+    	 <profile>
+			<id>src</id>
+			<build>
+				<plugins>
+					 <plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.1.2</version>
+							<executions>
+								<execution>
+									<id>attach-sources</id>
+									<goals>
+										<goal>jar-no-fork</goal>
+									</goals>
+								</execution>
+							</executions>
+					</plugin>					
+				</plugins>
+			</build>		
+		</profile>
+    	  <profile>
+            <id>docs</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                      	<version>3.8.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>                                
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>                    
+                </plugins>
+            </build>
+        </profile>         
+        <profile>
+			<id>no-gpg</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.1.2</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>none</phase>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+    </profiles>
+    
+      <repositories>
+		<repository>
+			<id>mobius-public-repository-group</id>
+			<name>Mobius Public Maven Repository Group</name>
+			<url>https://oss.sonatype.org/content/groups/public/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+    
+    <build>	
+        <plugins>              
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.8.0</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>                        
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+	
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>                		  	
+            </plugin>
+        </plugins>
+    </build>
+    
+     <scm>
+		<connection>scm:git:https://github.com/mobius-software-ltd/corsac-sip.git</connection>
+		<developerConnection>scm:git:git@github.com:mobius-software-ltd/corsac-sip.git</developerConnection>
+		<url>https://github.com/mobius-software-ltd/corsac-sip</url>
+	    <tag>HEAD</tag>
+    </scm>
+    
+</project>
